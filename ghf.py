@@ -15,16 +15,13 @@ def main(argv):
 
     base_url = "https://github.com/"
 
-    print "Checking available Github handles..."
     # Iterate through the dictionary and save valid handles
+    print "Checking available Github handles..."
     with open(argv[1],'r') as dictionary:
         with open("results.txt", 'a') as out:
             for w in dictionary:
                 if requests.get(base_url + w.rstrip()).status_code == 404:
-                    print base_url + w
-                    print requests.get(base_url + w).status_code
-                    out.write(w + "\n")
-
+                    out.write(w)
     print "Done."
 
 if __name__ == "__main__":
