@@ -32,14 +32,14 @@ def main(argv):
     # Process the handles in parallel
     print "Starting thread pool..."
     thread_pool = ThreadPool(100)
-    thread_pool.map(process_handle, handles)
+    valid_handles = thread_pool.map(process_handle, handles)
 
     # Remove duplicates from handles list
-    handles = sorted(list(set(handles)))
+    valid_handles = sorted(list(set(valid_handles)))
 
     # Save results
-    with open("results.txt", 'a') as out:
-    	for h in handles:
+    with open("results.txt", 'w') as out:
+    	for h in valid_handles:
     		out.write(h)
 
     print "Done."
